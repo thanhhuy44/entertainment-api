@@ -144,13 +144,7 @@ export const tmdbApi = process.env.TMDB_KEY && process.env.TMDB_KEY;
 
   try {
     fastify.get('/', (_, rp) => {
-      rp.status(200).send(
-        `Welcome to consumet api! 🎉 \n${
-          process.env.NODE_ENV === 'DEMO'
-            ? 'This is a demo of the api. You should only use this for testing purposes.'
-            : ''
-        }`,
-      );
+      rp.status(200).send(`API working well! 🎉`);
     });
     fastify.get('*', (request, reply) => {
       reply.status(404).send({
