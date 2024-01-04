@@ -5,6 +5,7 @@ import { StreamingServers } from '@consumet/extensions/dist/models';
 import cache from '../../utils/cache';
 import { redis } from '../../main';
 import { Redis } from 'ioredis';
+import FlixHQControllers from '../../controllers/movies/flixhq';
 
 const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
   const flixhq = new MOVIES.FlixHQ();
@@ -15,6 +16,16 @@ const routes = async (fastify: FastifyInstance, options: RegisterOptions) => {
         "Welcome to the flixhq provider: check out the provider's website @ https://flixhq.to/",
       routes: ['/:query', '/info', '/watch'],
       documentation: 'https://docs.consumet.org/#tag/flixhq',
+    });
+  });
+
+  fastify.get('/home', async (request: FastifyRequest, reply: FastifyReply) => {
+    const res = await FlixHQControllers.getHome();
+
+    reply.status(200).send({
+      statusCode: 200,
+      message: 'OK',
+      data: res,
     });
   });
 

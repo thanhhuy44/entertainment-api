@@ -35,3 +35,5 @@ interface Hashes {
   SHA256: string[];
   TTH: string;
 }
+
+export interface Movie {}
